@@ -1,0 +1,4 @@
+{
+  "roots": ["<rootDir>/app"],
+  "preset": "ts-jest/presets/js-with-ts"
+}

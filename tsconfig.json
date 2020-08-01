@@ -1,0 +1,24 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true
+  },
+  "include": [
+    "app/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
