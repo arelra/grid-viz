@@ -1,8 +1,5 @@
 import React, { useState, ReactElement } from 'react';
 import Cell from './Cell';
-import GridControls from './GridControls';
-
-const N = 5;
 
 const gridStyleCreator = (n: number) => {
   return {
@@ -44,14 +41,11 @@ const setFilled = (grid: Array<Array<ReactElement>>) => {
   })
 }
 
-const Grid = () => {
-  const [size, setSize] = useState(N);
-  // TODO make sure created only if N changes
+const Grid = ({size}: {size: number}) => {
   const grid = createGrid(size);
   setFilled(grid);
   return (
     <div>
-      <GridControls size={size} setSize={setSize} />
       <div style={gridStyleCreator(size)}>
         {grid}
       </div>

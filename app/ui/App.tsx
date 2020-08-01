@@ -1,16 +1,24 @@
-import React from "react";
-import Layout from "./layout/Layout";
+import React, { useState } from "react";
 import Panel from "./layout/Panel";
-import PanelLeft from "./layout/PanelLeft";
 import Grid from "./grid/Grid";
+import GridControls from './grid/GridControls';
 
-const App = () => (
-  <Layout>
-    <PanelLeft />
-    <Panel>
-      <Grid/>
+const DEFAULT_GRID_SIZE = 5;
+
+const layoutStyle = {
+  display: "grid",
+  gridTemplateColumns: "minmax(max-content, 15%) auto",
+  width: "100%",
+};
+
+const App = () => {
+  const [size, setSize] = useState(DEFAULT_GRID_SIZE);
+  return (
+    <Panel style={layoutStyle}>
+      <GridControls size={size} setSize={setSize} />
+      <Grid size={size} />
     </Panel>
-  </Layout>
-);
+  )
+};
 
 export default App;
