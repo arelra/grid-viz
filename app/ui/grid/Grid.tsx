@@ -1,6 +1,6 @@
 import React, { useState, ReactElement } from 'react';
 import Cell from './Cell';
-import SizeSlider from './SizeSlider';
+import GridControls from './GridControls';
 
 const N = 5;
 
@@ -49,10 +49,9 @@ const Grid = () => {
   // TODO make sure created only if N changes
   const grid = createGrid(size);
   setFilled(grid);
-  console.log(grid);
   return (
     <div>
-      <SizeSlider size={size} setSize={setSize} />
+      <GridControls size={size} setSize={setSize} />
       <div style={gridStyleCreator(size)}>
         {grid}
       </div>

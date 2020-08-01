@@ -7,11 +7,10 @@ interface Props {
 
 const SizeSlider = ({ size, setSize }: Props) => {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    console.log(event.target.value);
     setSize(Number(event.target.value));
   }
   return (
-    <>
+    <div>
       <input
         id="sizeSlider"
         type="range"
@@ -21,7 +20,7 @@ const SizeSlider = ({ size, setSize }: Props) => {
         onChange={handleChange}
       />
       <label htmlFor="sizeSlider">{size} x {size}</label>
-    </>
+    </div>
   )
 };
 
