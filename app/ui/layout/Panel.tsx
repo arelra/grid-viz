@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Panel = ({ children, style, title }: Props) => (
-  <div style={{ ...panelStyle, ...style }}>
+  <div style={{...panelStyle, ...style}}>
     <div style={headerStyle}>
       {title}
     </div>

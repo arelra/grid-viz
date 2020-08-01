@@ -6,6 +6,7 @@ import Grid from "./grid/Grid";
 
 const App = () => (
   <Layout>
+    <PanelLeft />
     <Panel>
       <Grid/>
     </Panel>

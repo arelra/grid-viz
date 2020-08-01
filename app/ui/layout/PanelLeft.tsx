@@ -2,7 +2,7 @@ import React from "react";
 import Panel from "./Panel";
 
 const panelLeftStyle = {
-  borderRight: "1px solid lightgrey",
+  // borderRight: "1px solid lightgrey",
 }
 
 const PanelLeft = () => (

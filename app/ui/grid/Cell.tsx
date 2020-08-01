@@ -20,6 +20,7 @@ const Cell = ({ row, col }: Props) => {
       onMouseLeave={() => setHover(false)}
       style={cellStyle(hover)}
     >
+      
     </div>
   )
 };

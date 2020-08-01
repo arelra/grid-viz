@@ -1,9 +1,9 @@
 import React from 'react';
 
 const grid = {
-  columnGap: "8px",
+  columnGap: "1rem",
   display: "grid",
-  gridTemplateColumns: "minmax(max-content, 10%) auto",
+  gridTemplateColumns: "minmax(max-content, 15%) auto",
   padding: "0.5rem",
   width: "100%",
 }
