@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 
-const cellStyle = (hover: boolean) => ({
-  backgroundColor: hover ? 'red' : 'white',
+const cellStyle = (hover: boolean, filled: boolean) => ({
+  backgroundColor: hover ? 'pink' : (filled ? 'red' : 'white'),
 });
 
 interface Props {
-  row: number,
   col: number,
+  row: number,
+  filled?: boolean,
 };
 
-const Cell = ({ row, col }: Props) => {
+const Cell = ({ row, col, filled = false }: Props) => {
   const [hover, setHover] = useState(false);
+  const [isFilled, setFilled] = useState(filled);
   return (
     <div
       data-row={row}
       data-col={col}
-      onClick={() => console.log(`${row} ${col}`)}
+      onClick={() => setFilled(!isFilled)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      style={cellStyle(hover)}
+      style={cellStyle(hover, isFilled)}
     >
       
     </div>

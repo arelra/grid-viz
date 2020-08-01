@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ReactElement } from 'react';
 import Cell from './Cell';
 import SizeSlider from './SizeSlider';
 
@@ -20,15 +20,36 @@ const gridStyleCreator = (n: number) => {
 const createGrid = (size: number) => {
   const rows = [...Array(size)];
   const grid = rows.map((r, i) => [...Array(size)].map((c, j) =>
-    <Cell row={i} col={j} />));
+    <Cell
+      key={`${i}-${j}`}
+      row={i}
+      col={j}
+    />));
+
   return grid;
+}
+
+const setFilled = (grid: Array<Array<ReactElement>>) => {
+  const filled: Array<Array<number>> = [
+    [4],
+    [0,1],
+    [0,1,3,4],
+    [],
+    [0,1,2]
+  ];
+  filled.forEach((colArray, row) => {
+    colArray.forEach(col => {
+      grid[row][col] = <Cell key={`${row}-${col}`} row={row} col={col} filled={true} />;
+    })
+  })
 }
 
 const Grid = () => {
   const [size, setSize] = useState(N);
   // TODO make sure created only if N changes
   const grid = createGrid(size);
-  console.log(`gridSize: ${size}`);
+  setFilled(grid);
+  console.log(grid);
   return (
     <div>
       <SizeSlider size={size} setSize={setSize} />
