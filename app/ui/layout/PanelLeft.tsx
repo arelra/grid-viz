@@ -6,7 +6,7 @@ const panelLeftStyle = {
 }
 
 const PanelLeft = () => (
-  <Panel style={panelLeftStyle} title="experiments" />
+  <Panel style={panelLeftStyle} title="Controls" />
 );
 
 export default PanelLeft;
