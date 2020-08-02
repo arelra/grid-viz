@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import Cell from "../Cell";
 
-const createGrid = (size: number) => {
+const createGrid = (size: number): JSX.Element[][] => {
   const rows = [...Array(size)];
   const grid = rows.map((r, i) =>
   [...Array(size)].map((c, j) => (
@@ -19,6 +19,7 @@ const defaultFilled = [
   [0, 1, 2],
 ];
 
+// TODO make immutable
 const fillGrid = (
   grid: Array<Array<ReactElement>>,
   fill: Array<Array<number>> = defaultFilled
