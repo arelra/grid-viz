@@ -1,16 +1,17 @@
+import { ReactElement } from 'react';
 import { getAdjacentCells, traverse } from "./grid-traverse";
-import { createGrid, fillGrid } from './grid-creator';
+import createGrid, { Grid } from "./grid-creator";
 
 // ------- helper functions
 
-const hasCell = (cells: Array<JSX.Element>, key: string): boolean =>
+const hasCell = (cells: Array<ReactElement>, key: string): boolean =>
   cells.some(cell => cell.key === key)
 
 const hasVisited = (visited: Array<string>, key: string): boolean =>
   visited.some((visit) => visit === key);
 
 const expectAdjacentCells = (
-  grid: Array<Array<JSX.Element>>,
+  grid: Grid,
   startingCell: [number, number],
   expectedKeys: Array<string>,
 ) => {
@@ -22,7 +23,7 @@ const expectAdjacentCells = (
 }
 
 const expectVisited = (
-  grid: Array<Array<JSX.Element>>,
+  grid: Grid,
   startingCell: [number, number],
   expectedKeys: Array<string>,
 ) => {
@@ -37,7 +38,6 @@ const expectVisited = (
 
 test("traverse default grid starting from an empty cell returns an empty list", () => {
   const grid = createGrid(5);
-  fillGrid(grid);
   expect(traverse(grid, [0, 0])).toStrictEqual([]);
 });
 
@@ -53,7 +53,6 @@ test("traverse default grid starting from an empty cell returns an empty list", 
  */
 test('get adjacent filled cells of the default grid', () => {
   const grid = createGrid(5);
-  fillGrid(grid);
   // row 0
   expectAdjacentCells(grid, [0,0], ["1-0"]);
   expectAdjacentCells(grid, [0,4], []);
@@ -81,9 +80,8 @@ test('get adjacent filled cells of the default grid', () => {
  *   [1,1,1,0,0],
  * ]
  */
-test('traverse default grid starting from filled cells returns all visited cells', () => {
+test('traverse default grid from filled cells returns all connected cells', () => {
   const grid = createGrid(5);
-  fillGrid(grid);
   // row 0
   expectVisited(grid, [0, 0], []);
   expectVisited(grid, [0, 4], ["0-4"]);
@@ -102,16 +100,13 @@ test('traverse default grid starting from filled cells returns all visited cells
 });
 
 test("traverse fully filled grids", () => {
-  let grid = createGrid(1);
-  fillGrid(grid, [[0]]);
+  let grid = createGrid(1, [[0]]);
   expectVisited(grid, [0, 0], ["0-0"]);
 
-  grid = createGrid(2);
-  fillGrid(grid, [[0,1],[0,1]]);
+  grid = createGrid(2, [[0,1],[0,1]]);
   expectVisited(grid, [0, 0], ["0-0", "0-1", "1-0", "1-1"]);
 
-  grid = createGrid(10);
-  fillGrid(grid, [
+  grid = createGrid(10, [
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -127,8 +122,7 @@ test("traverse fully filled grids", () => {
 });
 
 test("traverse circular fill pattern", () => {
-  let grid = createGrid(3);
-  fillGrid(grid, [
+  let grid = createGrid(3, [
     [0, 1, 2],
     [0, 2],
     [0, 1, 2],
@@ -141,8 +135,7 @@ test("traverse circular fill pattern", () => {
 });
 
 test("traverse diagonal fill pattern", () => {
-  let grid = createGrid(3);
-  fillGrid(grid, [
+  let grid = createGrid(3, [
     [0, 2],
     [1],
     [0, 2],

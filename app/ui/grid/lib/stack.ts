@@ -1,7 +1,4 @@
 class Stack<T> {
-  /**
-   * Stacks are LIFO i.e. last in first out
-   */
   items: Array<T>;
   constructor() {
     this.items = [];

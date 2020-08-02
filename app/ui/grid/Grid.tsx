@@ -1,5 +1,5 @@
-import React, { useState, ReactElement } from 'react';
-import { createGrid, fillGrid } from './lib/grid-creator';
+import React, { useEffect, useState, ReactElement } from "react";
+import createGrid, { Grid } from './lib/grid-creator';
 
 const gridStyleCreator = (n: number) => {
   return {
@@ -12,11 +12,14 @@ const gridStyleCreator = (n: number) => {
     gridTemplateRows: `repeat(${n}, 1fr)`,
     gridGap: "2px",
   }
-}
+};
 
 const Grid = ({size}: {size: number}) => {
-  const grid = createGrid(size);
-  fillGrid(grid);
+  const [grid, setGrid] = useState<Grid | undefined>();
+  useEffect(() => {
+    const grid = createGrid(size);
+    setGrid(grid);
+  }, [size]);
   return (
     <div>
       <div style={gridStyleCreator(size)}>
@@ -24,6 +27,6 @@ const Grid = ({size}: {size: number}) => {
       </div>
     </div>
   )
-}
+};
 
 export default Grid;

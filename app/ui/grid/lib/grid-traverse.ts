@@ -1,18 +1,27 @@
-// TODO JSDOC
+import { ReactElement } from "react";
+import { Grid, Cell, Cells } from "./grid-creator";
 import Stack from "./stack";
 
-const getAdjacentCells = <T extends JSX.Element>(
-  grid: Array<Array<T>>,
+/**
+ * Gets adjacent cells given a start position. Assumes start position is a filled cell. 
+ * Cells are considered connected if they are:
+ * - horizontal or vertical
+ * - filled
+ * @param grid
+ * @param startPosition
+ */
+const getAdjacentCells = (
+  grid: Grid,
   [row, col]: [number, number]
-): Array<T> => {
+): Cells => {
   const adjacentCells: Array<Array<number>> = [
     [row - 1, col], // top
     [row, col + 1], // right
     [row + 1, col], // bottom
     [row, col - 1], // left
   ];
-  const filledAdjacentCells: Array<T> = adjacentCells.reduce(
-    (acc: Array<T>, item: Array<number>) => {
+  const filledAdjacentCells: Cells = adjacentCells.reduce(
+    (acc: Cells, item: Array<number>) => {
       const [row, col] = item;
       const cell = grid[row] ? grid[row][col] : undefined;
       if (cell && cell.props.filled) {
@@ -23,41 +32,41 @@ const getAdjacentCells = <T extends JSX.Element>(
   return filledAdjacentCells;
 };
 
-const getPositionString = <T extends JSX.Element>(cell: T) =>
+const getPositionString = (cell: ReactElement) =>
   `${cell.props.row}-${cell.props.col}`;
 
-const visitCell = <T extends JSX.Element>(
+const visitCell = <T extends ReactElement>(
   stack: Stack<T>,
   visited: Array<string>,
-  cell: T,
+  cell: T
 ) => {
   stack.push(cell);
   visited.push(getPositionString(cell));
 };
 
 /**
- * input: NxN array:
- * [
- *   [Cell, Cell, Cell],
- *   [Cell, Cell, Cell],
- *   [Cell, Cell, Cell],
- * ]
+ * Depth first search of grid to return connected cells
+ * 
+ * @param grid
+ * @param startPosition 
  */
-const traverse = <T extends JSX.Element>(
-  graph: Array<Array<T>>,
+ const traverse = (
+  grid: Grid,
   [row, col]: [number, number]
 ): Array<string> => {
-  const stack = new Stack<T>();
+  const stack = new Stack<Cell>();
   const visited: Array<string> = [];
-  const startCell: T = graph[row][col];
+  const startCell: Cell = grid[row][col];
   if (!startCell || !startCell.props.filled) {
     return [];
   }
   visitCell(stack, visited, startCell);
-  while(!stack.isEmpty()) {
-    const cell: T = stack.pop();
-    const pos: [number, number] = [cell.props.row, cell.props.col];
-    const adjacentCells: Array<T> = getAdjacentCells(graph, pos);
+  while (!stack.isEmpty()) {
+    const cell = stack.pop();
+    const adjacentCells = getAdjacentCells(grid, [
+      cell.props.row,
+      cell.props.col,
+    ]);
     for (const adjCell of adjacentCells) {
       if (!visited.includes(getPositionString(adjCell))) {
         visitCell(stack, visited, adjCell);

@@ -15,7 +15,7 @@ const SizeSlider = ({ size, setSize }: Props) => {
         id="sizeSlider"
         type="range"
         defaultValue={size}
-        min="3"
+        min="5"
         max="50"
         onChange={handleChange}
       />

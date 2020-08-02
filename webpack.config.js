@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Grid Viz',
-      template: 'app/ui/html/index.html'
+      template: 'app/index.html'
     })
   ],
   module: {
