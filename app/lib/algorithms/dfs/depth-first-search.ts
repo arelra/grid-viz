@@ -1,5 +1,5 @@
 import Graph from "../../data-structures/graph/graph";
-import Stack from "../../data-structures/stack/stack";
+import Stack from "../../../ui/grid/lib/stack";
 import Vertex from '../../data-structures/graph/vertex';
 
 interface Traversal {

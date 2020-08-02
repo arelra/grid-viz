@@ -7,10 +7,10 @@ const cellStyle = (hover: boolean, filled: boolean) => ({
 interface Props {
   col: number,
   row: number,
-  filled?: boolean,
+  filled: boolean,
 };
 
-const Cell = ({ row, col, filled = false }: Props) => {
+const Cell = ({ row, col, filled }: Props) => {
   const [hover, setHover] = useState(false);
   const [isFilled, setFilled] = useState(filled);
   return (
