@@ -1,4 +1,5 @@
 // TODO JSDOC
+import Stack from "./stack";
 
 const getAdjacentCells = <T extends JSX.Element>(
   grid: Array<Array<T>>,
@@ -22,6 +23,18 @@ const getAdjacentCells = <T extends JSX.Element>(
   return filledAdjacentCells;
 };
 
+const getPositionString = <T extends JSX.Element>(cell: T) =>
+  `${cell.props.row}-${cell.props.col}`;
+
+const visitCell = <T extends JSX.Element>(
+  stack: Stack<T>,
+  visited: Array<string>,
+  cell: T,
+) => {
+  stack.push(cell);
+  visited.push(getPositionString(cell));
+};
+
 /**
  * input: NxN array:
  * [
@@ -33,12 +46,25 @@ const getAdjacentCells = <T extends JSX.Element>(
 const traverse = <T extends JSX.Element>(
   graph: Array<Array<T>>,
   [row, col]: [number, number]
-): Array<T> => {
+): Array<string> => {
+  const stack = new Stack<T>();
+  const visited: Array<string> = [];
   const startCell: T = graph[row][col];
   if (!startCell || !startCell.props.filled) {
     return [];
   }
-  return [];
+  visitCell(stack, visited, startCell);
+  while(!stack.isEmpty()) {
+    const cell: T = stack.pop();
+    const pos: [number, number] = [cell.props.row, cell.props.col];
+    const adjacentCells: Array<T> = getAdjacentCells(graph, pos);
+    for (const adjCell of adjacentCells) {
+      if (!visited.includes(getPositionString(adjCell))) {
+        visitCell(stack, visited, adjCell);
+      }
+    }
+  }
+  return visited;
 };
 
 export {
