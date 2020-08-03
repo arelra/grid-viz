@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ReactElement } from 'react';
 import { SketchPicker } from 'react-color';
 
 const inactiveStyle = (col: string) => ({
@@ -16,7 +16,7 @@ interface ColorPickerInactiveProps {
 const ColorPickerInactive = ({
   color,
   toggleActive,
-}: ColorPickerInactiveProps): JSX.Element => (
+}: ColorPickerInactiveProps): ReactElement => (
   <div
     onClick={toggleActive}
     style={inactiveStyle(color)}>
@@ -30,7 +30,7 @@ interface ColorPickerActiveProps {
 
 const colorPickerActiveStyle = {
   position: "absolute",
-  left: "8.5rem",
+  left: "6.5rem",
   top: "0rem",
 } as React.CSSProperties;
 
@@ -53,11 +53,15 @@ const colorPickerStyle = {
 } as React.CSSProperties;
 
 const colorPickerLabelStyle = {
-  flex: "0 0 6rem",
+  flex: "0 0 4rem",
 } as React.CSSProperties;
+interface ColorPickerProps {
+  label: string,
+  color: string,
+  setColor: (value: string) => void,
+};
 
-const ColorPicker = ({label}: {label: string}) => {
-  const [color, setColor] = useState("#F00");
+const ColorPicker = ({ label, color, setColor }: ColorPickerProps) => {
   const [active, setActive] = useState(false);
   return (
     <div style={colorPickerStyle}>

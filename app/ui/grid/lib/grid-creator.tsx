@@ -2,14 +2,6 @@ import React from 'react';
 import { Grid } from './grid-types';
 import Cell from "../Cell";
 
-const defaultFilled = [
-  [4],
-  [0, 1],
-  [0, 1, 3, 4],
-  [],
-  [0, 1, 2],
-];
-
 /**
  * Creates a grid of Cells
  * 
@@ -18,7 +10,7 @@ const defaultFilled = [
  */
 const createGrid = (
   size: number,
-  fill: Array<Array<number>> = defaultFilled
+  fill: Array<Array<number>>
 ): Grid => {
   const rows = [...Array(size)];
   const grid = rows.map((r, i) =>

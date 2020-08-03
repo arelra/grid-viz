@@ -39,18 +39,39 @@ const defaultGridState: GridState = {
   },
 };
 
+interface Colors {
+  filled: string,
+  unfilled: string,
+  hover: string,
+};
+
 export const GridDispatchContext =
   createContext<{
+    colors: Colors,
     state: GridState;
     dispatch: React.Dispatch<GridAction>
   }>({
+    colors: {
+      filled: "",
+      unfilled: "",
+      hover: "",
+    },
     state: defaultGridState,
     dispatch: () => null
   });
 
+interface GridProps {
+  size: number,
+  fill: Array<Array<number>>,
+  colors: {
+    filled: string,
+    unfilled: string,
+    hover: string,
+  },
+};
+
 const Grid = (
-  { size, fill }: 
-  { size: number, fill: Array<Array<number>>}) => {
+  { size, fill, colors }: GridProps) => {
   const [state, dispatch] = useReducer(gridReducer, defaultGridState);
   useEffect(() => {
     console.log(fill);
@@ -65,7 +86,7 @@ const Grid = (
   }, [size, fill]);
   return (
     <div style={gridStyleCreator(size)}>
-      <GridDispatchContext.Provider value={{state, dispatch}}>
+      <GridDispatchContext.Provider value={{colors, state, dispatch}}>
         {state.grid}
       </GridDispatchContext.Provider>
     </div>

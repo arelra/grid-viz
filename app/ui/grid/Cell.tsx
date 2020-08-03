@@ -4,12 +4,17 @@ import {
   GridActionTypes,
   GridDispatchContext
 } from './Grid';
+interface Colors {
+  filled: string,
+  unfilled: string,
+  hover: string,
+};
 
-const cellStyle = (hover: boolean, filled: boolean) => ({
-  backgroundColor: hover ? 'pink' : (filled ? 'red' : 'white'),
+const cellStyle = (hover: boolean, filled: boolean, colors: Colors) => ({
+  backgroundColor: hover ? colors.hover : (filled ? colors.filled : colors.unfilled),
   color: "white",
   display: "flex",
-  fontSize: "32px",
+  fontSize: "24px",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
@@ -24,7 +29,7 @@ interface Props {
 const Cell = ({ row, col, filled }: Props) => {
   const [hover, setHover] = useState(false);
   const [text, setText] = useState("");
-  const {state, dispatch} = useContext(GridDispatchContext);
+  const {colors, state, dispatch} = useContext(GridDispatchContext);
   const handleClick = () => {
     const action: GridAction = {
       type: GridActionTypes.CLICK_CELL,
@@ -58,7 +63,7 @@ const Cell = ({ row, col, filled }: Props) => {
       data-col={col}
       onClick={handleClick}
       onMouseEnter={() => { filled && setHover(true)} }
-      style={cellStyle(hover, filled)}
+      style={cellStyle(hover, filled, colors)}
     >
       {text || null}
     </div>

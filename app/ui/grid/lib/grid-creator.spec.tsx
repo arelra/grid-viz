@@ -2,6 +2,14 @@ import { ReactElement } from 'react';
 import { createGrid, createRandomFill } from "./grid-creator";
 import { Grid } from './grid-types';
 
+const defaultFill = [
+  [4],
+  [0, 1],
+  [0, 1, 3, 4],
+  [],
+  [0, 1, 2],
+];
+
 const expectCellPosition = (
   grid: Grid,
   [row, col]: [number, number]
@@ -30,7 +38,7 @@ test("an unfilled grid has the correct cell props 'row', 'col' and 'filled'", ()
 });
 
 test("the default grid has the correct cells with prop 'filled=true'", () => {
-  const grid = createGrid(5);
+  const grid = createGrid(5, defaultFill);
   expectCellFilled(grid[0][4]);
   expectCellFilled(grid[1][0]);
   expectCellFilled(grid[1][1]);
@@ -44,7 +52,12 @@ test("the default grid has the correct cells with prop 'filled=true'", () => {
 });
 
 test("a custom grid has the correct cells with prop 'filled=true'", () => {
-  const grid = createGrid(4, [[0, 1, 2, 3], [], [], [0, 1, 2, 3]]);
+  const grid = createGrid(4, [
+    [0, 1, 2, 3],
+    [],
+    [],
+    [0, 1, 2, 3]
+  ]);
   grid[0].forEach((cell) => expectCellFilled(cell));
   grid[1].forEach((cell) => expectCellFilled(cell, false));
   grid[2].forEach((cell) => expectCellFilled(cell, false));

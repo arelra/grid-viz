@@ -37,8 +37,16 @@ const expectVisited = (
 
 // ------- tests
 
+const defaultFill = [
+  [4],
+  [0, 1],
+  [0, 1, 3, 4],
+  [],
+  [0, 1, 2],
+];
+
 test("traverse default grid starting from an empty cell returns an empty list", () => {
-  const grid = createGrid(5);
+  const grid = createGrid(5, defaultFill);
   expect(traverse(grid, [0, 0])).toStrictEqual([]);
 });
 
@@ -53,7 +61,7 @@ test("traverse default grid starting from an empty cell returns an empty list", 
  * ]
  */
 test('get adjacent filled cells of the default grid', () => {
-  const grid = createGrid(5);
+  const grid = createGrid(5, defaultFill);
   // row 0
   expectAdjacentCells(grid, [0,0], ["1-0"]);
   expectAdjacentCells(grid, [0,4], []);
@@ -82,7 +90,7 @@ test('get adjacent filled cells of the default grid', () => {
  * ]
  */
 test('traverse default grid from filled cells returns all connected cells', () => {
-  const grid = createGrid(5);
+  const grid = createGrid(5, defaultFill);
   // row 0
   expectVisited(grid, [0, 0], []);
   expectVisited(grid, [0, 4], ["0-4"]);

@@ -5,6 +5,7 @@ const layoutStyle = {
   gridTemplateColumns: "minmax(max-content, 15%) auto",
   width: "100%",
   padding: "0.5rem",
+  gridGap: "2rem",
 } as React.CSSProperties;
 
 interface Props {
