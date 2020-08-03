@@ -1,4 +1,6 @@
-# grid-viz
+# grid-viz 
+
+## Demo: https://arelra.github.io/grid-viz/
 
 ![Test](./docs/screenshot-01.png)
 
@@ -21,3 +23,7 @@
 Possible improvements:
 - performance optimisation: rather than traverse the UI grid traverse a simpler representation. Would also decouple traversal from UI.
 - more testing of UI components
+
+## Help
+
+The colour pickers are toggled by clicking on the square colour boxes.
