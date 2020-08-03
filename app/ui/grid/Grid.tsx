@@ -3,16 +3,15 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import { createGrid } from "./lib/grid-creator";
-import { Grid, Fill } from "../types/grid-types";
+import { createGrid, createRandomFill } from "./lib/grid-creator";
+import { Grid } from "../types/grid-types";
 import { Colors } from "../types/color-types";
 import { gridReducer, GridAction, GridActionTypes } from "./reducers/grid";
 export { GridActionTypes } from './reducers/grid';
 
 const gridStyleCreator = (n: number) => {
   return {
-    backgroundColor: 'lightgrey',
-    border: "2px solid lightgrey",
+    backgroundColor: 'white',
     display: "grid",
     width: "80vw",
     height: "80vw",
@@ -57,15 +56,16 @@ export const GridDispatchContext =
 
 interface GridProps {
   size: number,
-  fill: Fill,
+  fill: number,
   colors: Colors,
 };
 
 const Grid = (
   { size, fill, colors }: GridProps) => {
   const [state, dispatch] = useReducer(gridReducer, defaultGridState);
+
   useEffect(() => {
-    const grid = createGrid(size, fill);
+    const grid = createGrid(size, createRandomFill(size));
     const action: GridAction = {
       type: GridActionTypes.UPDATE_GRID,
       payload: {
@@ -74,6 +74,7 @@ const Grid = (
     };
     dispatch(action);
   }, [size, fill]);
+  
   return (
     <div style={gridStyleCreator(size)}>
       <GridDispatchContext.Provider value={{colors, state, dispatch}}>

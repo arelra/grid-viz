@@ -1,17 +1,7 @@
 import React from 'react';
 import SizeSlider from './SizeSlider';
 import ColorPicker from './ColorPicker';
-import { createRandomFill } from '../grid/lib/grid-creator';
-import { Fill } from '../types/grid-types';
 import { Colors } from '../types/color-types';
-
-interface Props {
-  size: number,
-  setSize: (value: number) => void,
-  setFill: (value: Fill) => void,
-  colors: Colors,
-  setColors: (value: Colors) => void,
-};
 
 const gridControlsStyle = {
   display: "flex",
@@ -21,21 +11,30 @@ const gridControlsStyle = {
   height: "10rem",
 } as React.CSSProperties;
 
-const handleRandom = (
+interface Props {
   size: number,
-  setFill: (value: Fill) => void,
-) => {
-  setFill(createRandomFill(size));
+  setSize: (value: number) => void,
+  fill: number,
+  setFill: (value: number) => void,
+  colors: Colors,
+  setColors: (value: Colors) => void,
 };
 
-const GridControls = ({ size, setSize, setFill, colors, setColors }: Props) => {
+const handleRandom = (
+  fill: number,
+  setFill: (value: number) => void,
+) => {
+  setFill(fill + 1);
+};
+
+const GridControls = ({ size, setSize, fill, setFill, colors, setColors }: Props) => {
   return (
     <div style={gridControlsStyle}>
       <SizeSlider size={size} setSize={setSize} />
       <input
         type="button"
         value="Random"
-        onClick={() => handleRandom(size, setFill)}
+        onClick={() => handleRandom(fill, setFill)}
       ></input>
       <ColorPicker
         label="filled"

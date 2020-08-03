@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import Layout from "./Layout";
 import Grid from "./grid/Grid";
 import GridControls from './controls/GridControls';
-import { createRandomFill } from "./grid/lib/grid-creator";
 
 const DEFAULT_GRID_SIZE = 5;
 
 const App = () => {
   const [size, setSize] = useState(DEFAULT_GRID_SIZE);
-  const [fill, setFill] = useState(createRandomFill(size));
+  const [fill, setFill] = useState(0);
   const [colors, setColors] = useState({
-    filled: "#F00",
-    unfilled: "#0F0",
-    hover: "#00F",
+    filled: "#4A69ED",
+    unfilled: "#EEE",
+    hover: "#2BD1C9",
   });
   return (
     <Layout>
       <GridControls
         size={size}
         setSize={setSize}
+        fill={fill}
         setFill={setFill}
         colors={colors}
         setColors={setColors}

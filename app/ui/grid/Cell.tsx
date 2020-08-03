@@ -5,13 +5,31 @@ import { Colors } from '../types/color-types';
 
 const cellStyle = (hover: boolean, filled: boolean, colors: Colors) => ({
   backgroundColor: hover ? colors.hover : (filled ? colors.filled : colors.unfilled),
+  transition: "background-color 0.5s ease-out",  
   color: "white",
   display: "flex",
   fontSize: "24px",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
+  borderRadius: "25%",
 }) as React.CSSProperties;
+
+// @keyframes pulse {
+//   0% {transform: scale(1);}
+//   50% {transform: scale(1.1);}
+//   100% {transform: scale(1);}
+// }
+
+const textAnimate = {
+
+}
+
+const textStyle = {
+  animationDuration: "2.5s",
+  animationFillMode: "both",
+  animationIterationCount: "infinite",
+};
 
 interface Props {
   col: number,
@@ -23,6 +41,7 @@ const Cell = ({ row, col, filled }: Props) => {
   const [hover, setHover] = useState(false);
   const [text, setText] = useState("");
   const {colors, state, dispatch} = useContext(GridDispatchContext);
+
   const handleClick = () => {
     const action: GridAction = {
       type: GridActionTypes.CLICK_CELL,
@@ -31,7 +50,8 @@ const Cell = ({ row, col, filled }: Props) => {
       },
     };
     dispatch(action);
-  }
+  };
+
   useEffect(() => {
     if (hover) {
       const action: GridAction = {
@@ -43,6 +63,7 @@ const Cell = ({ row, col, filled }: Props) => {
       dispatch(action);
     }
   }, [hover]);
+
   useEffect(() => {
     const key = `${row}-${col}`;
     state.clickCell.key === key ?
@@ -50,15 +71,16 @@ const Cell = ({ row, col, filled }: Props) => {
     state.hoverCells.includes(key) ?
       setHover(true) : setHover(false);
   }, [state]);
+
   return (
     <div
       data-row={row}
       data-col={col}
-      onClick={handleClick}
+      onClick={() => filled && handleClick()}
       onMouseEnter={() => { filled && setHover(true)} }
       style={cellStyle(hover, filled, colors)}
     >
-      {text || null}
+      {text ? <div style={textStyle}>{text}</div> : null}
     </div>
   )
 };
