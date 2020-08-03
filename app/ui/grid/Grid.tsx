@@ -3,7 +3,8 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import createGrid, { Grid } from './lib/grid-creator';
+import { createGrid } from "./lib/grid-creator";
+import { Grid } from "./lib/grid-types";
 import { gridReducer, GridAction, GridActionTypes } from "./reducers/grid";
 export { GridActionTypes } from './reducers/grid';
 
@@ -30,7 +31,7 @@ export interface GridState {
 };
 
 const defaultGridState: GridState = {
-  grid: createGrid(5),
+  grid: [[]],
   hoverCells: [],
   clickCell: {
     key: "",
@@ -47,10 +48,13 @@ export const GridDispatchContext =
     dispatch: () => null
   });
 
-const Grid = ({size}: {size: number}) => {
+const Grid = (
+  { size, fill }: 
+  { size: number, fill: Array<Array<number>>}) => {
   const [state, dispatch] = useReducer(gridReducer, defaultGridState);
   useEffect(() => {
-    const grid = createGrid(size);
+    console.log(fill);
+    const grid = createGrid(size, fill);
     const action: GridAction = {
       type: GridActionTypes.UPDATE_GRID,
       payload: {
@@ -58,7 +62,7 @@ const Grid = ({size}: {size: number}) => {
       },
     };
     dispatch(action);
-  }, [size]);
+  }, [size, fill]);
   return (
     <div style={gridStyleCreator(size)}>
       <GridDispatchContext.Provider value={{state, dispatch}}>

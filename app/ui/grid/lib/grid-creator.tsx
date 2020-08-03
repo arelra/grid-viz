@@ -1,9 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
+import { Grid } from './grid-types';
 import Cell from "../Cell";
-
-export type Cell = ReactElement;
-export type Cells = Array<Cell>;
-export type Grid = Array<Cells>;
 
 const defaultFilled = [
   [4],
@@ -31,6 +28,38 @@ const createGrid = (
     })
   );
   return grid;
-};  
+};
 
-export default createGrid;
+const rand = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min) + min);
+
+const randInterval = (size: number, div: number) =>
+  Math.floor(size / div);
+
+const createRandomFill = (
+  size: number,
+): Array<Array<number>> => {
+  // random number of iterations per line
+  const iterations = [
+    randInterval(size, 5),
+    randInterval(size, 4),
+    randInterval(size, 3),
+    randInterval(size, 2),
+    randInterval(size, 1),
+  ];
+  const fill = [];
+  for (let i = 0; i < size; i++) {
+    const iteration = iterations[rand(0, iterations.length)];
+    const row = [];
+    for (let j = 0; j < iteration; j++) {
+      row.push(rand(0, size));
+    }
+    fill.push(row);
+  }
+  return fill;
+};
+
+export {
+  createGrid,
+  createRandomFill,
+};

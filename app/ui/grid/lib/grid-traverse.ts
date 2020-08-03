@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Grid, Cell, Cells } from "./grid-creator";
+import { Grid, Cell, Cells } from "./grid-types";
 import Stack from "./stack";
 
 /**

@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
-import createGrid, { Grid } from './grid-creator';
+import { createGrid, createRandomFill } from "./grid-creator";
+import { Grid } from './grid-types';
 
 const expectCellPosition = (
   grid: Grid,
@@ -49,3 +50,13 @@ test("a custom grid has the correct cells with prop 'filled=true'", () => {
   grid[2].forEach((cell) => expectCellFilled(cell, false));
   grid[3].forEach((cell) => expectCellFilled(cell));
 });
+
+test("random fill is created", () => {
+  const size = 5;
+  const fill = createRandomFill(size);
+  expect(fill.length).toBe(size);
+  fill.forEach((row) => {
+    expect(row.length).toBeGreaterThan(0);
+    expect(row.length).toBeLessThan(size + 1);
+  });
+})

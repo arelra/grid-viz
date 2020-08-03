@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { getAdjacentCells, traverse } from "./grid-traverse";
-import createGrid, { Grid } from "./grid-creator";
+import { createGrid } from "./grid-creator";
+import { Grid } from "./grid-types";
 
 // ------- helper functions
 

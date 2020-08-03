@@ -1,4 +1,4 @@
-import { Grid } from '../lib/grid-creator';
+import { Grid } from '../lib/grid-types';
 import { GridState } from '../Grid';
 import { traverse } from "../lib/grid-traverse";
 
@@ -28,8 +28,11 @@ const gridReducer = (state: GridState, action: GridAction): GridState => {
     case GridActionTypes.UPDATE_GRID: {
       const newState = {
         grid: action.payload.grid,
-        hoverCells: state.hoverCells,
-        clickCell: state.clickCell,
+        hoverCells: [],
+        clickCell: {
+          key: "",
+          text: "",
+        },
       };
       return newState;
     }
