@@ -1,5 +1,5 @@
-import { Grid, Position } from '../../types/grid-types';
-import { GridState } from '../Grid';
+import { Grid, Position } from "../../types/grid-types";
+import { GridState } from "../Grid";
 import { traverse } from "../lib/grid-traverse";
 
 enum GridActionTypes {

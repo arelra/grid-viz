@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Fill } from '../../types/grid-types';
+import React from "react";
+import { Grid, Fill } from "../../types/grid-types";
 import Cell from "../Cell";
 
 /**

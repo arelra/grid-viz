@@ -7,7 +7,7 @@ import { createGrid, createRandomFill } from "./lib/grid-creator";
 import { Grid } from "../types/grid-types";
 import { Colors } from "../types/color-types";
 import { gridReducer, GridAction, GridActionTypes } from "./reducers/grid";
-export { GridActionTypes } from './reducers/grid';
+export { GridActionTypes } from "./reducers/grid";
 
 const gridStyleCreator = (n: number) => {
   return {

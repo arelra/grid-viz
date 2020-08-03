@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 import { getAdjacentCells, traverse } from "./grid-traverse";
 import { createGrid } from "./grid-creator";
 import { Grid, Position } from "../../types/grid-types";

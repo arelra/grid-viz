@@ -1,6 +1,6 @@
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 import { createGrid, createRandomFill } from "./grid-creator";
-import { Grid, Position } from '../../types/grid-types';
+import { Grid, Position } from "../../types/grid-types";
 
 const defaultFill = [
   [4],

@@ -1,4 +1,8 @@
 {
   "roots": ["<rootDir>/app"],
-  "preset": "ts-jest/presets/js-with-ts"
+  "preset": "ts-jest/presets/js-with-ts",
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "coverageReporters": ["text"],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+  "setupFilesAfterEnv": ["<rootDir>/enzyme.config.js"]
 }

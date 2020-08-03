@@ -2,6 +2,10 @@
 
 ![Test](./docs/screenshot-01.png)
 
+## Running Locally
+
+`yarn && yarn start`
+
 ## Points of Interest
 
 `/app/ui/grid/lib/grid-traverse.ts ` uses depth first search to traverse the grid.
@@ -16,4 +20,4 @@
 
 Possible improvements:
 - performance optimisation: rather than traverse the UI grid traverse a simpler representation. Would also decouple traversal from UI.
-- testing of UI components
+- more testing of UI components
