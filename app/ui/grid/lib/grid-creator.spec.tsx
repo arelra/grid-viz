@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { createGrid, createRandomFill } from "./grid-creator";
-import { Grid } from './grid-types';
+import { Grid, Position } from '../../types/grid-types';
 
 const defaultFill = [
   [4],
@@ -12,7 +12,7 @@ const defaultFill = [
 
 const expectCellPosition = (
   grid: Grid,
-  [row, col]: [number, number]
+  [row, col]: Position
 ) => {
   expect(grid[row][col].props.row).toBe(row);
   expect(grid[row][col].props.col).toBe(col);

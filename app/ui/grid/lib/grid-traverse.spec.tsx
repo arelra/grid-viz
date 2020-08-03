@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { getAdjacentCells, traverse } from "./grid-traverse";
 import { createGrid } from "./grid-creator";
-import { Grid } from "./grid-types";
+import { Grid, Position } from "../../types/grid-types";
 
 // ------- helper functions
 
@@ -13,27 +13,27 @@ const hasVisited = (visited: Array<string>, key: string): boolean =>
 
 const expectAdjacentCells = (
   grid: Grid,
-  startingCell: [number, number],
-  expectedKeys: Array<string>,
+  startingCell: Position,
+  expectedKeys: Array<string>
 ) => {
   const adjacentCells = getAdjacentCells(grid, startingCell);
   expect(adjacentCells.length).toBe(expectedKeys.length);
-  for(const expectedKey of expectedKeys) {
+  for (const expectedKey of expectedKeys) {
     expect(hasCell(adjacentCells, expectedKey)).toBe(true);
   }
-}
+};
 
 const expectVisited = (
   grid: Grid,
-  startingCell: [number, number],
-  expectedKeys: Array<string>,
+  startingCell: Position,
+  expectedKeys: Array<string>
 ) => {
   const visited = traverse(grid, startingCell);
   expect(visited.length).toBe(expectedKeys.length);
-  for(const expectedKey of expectedKeys) {
+  for (const expectedKey of expectedKeys) {
     expect(hasVisited(visited, expectedKey)).toBe(true);
   }
-}
+};
 
 // ------- tests
 

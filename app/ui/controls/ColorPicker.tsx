@@ -55,6 +55,7 @@ const colorPickerStyle = {
 const colorPickerLabelStyle = {
   flex: "0 0 4rem",
 } as React.CSSProperties;
+
 interface ColorPickerProps {
   label: string,
   color: string,

@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Grid, Cell, Cells } from "./grid-types";
+import { Grid, Cell, Cells, Fill, Position } from "../../types/grid-types";
 import Stack from "./stack";
 
 /**
@@ -12,9 +12,9 @@ import Stack from "./stack";
  */
 const getAdjacentCells = (
   grid: Grid,
-  [row, col]: [number, number]
+  [row, col]: Position
 ): Cells => {
-  const adjacentCells: Array<Array<number>> = [
+  const adjacentCells: Fill = [
     [row - 1, col], // top
     [row, col + 1], // right
     [row + 1, col], // bottom
@@ -52,7 +52,7 @@ const visitCell = <T extends ReactElement>(
  */
  const traverse = (
   grid: Grid,
-  [row, col]: [number, number]
+  [row, col]: Position
 ): Array<string> => {
   const stack = new Stack<Cell>();
   const visited: Array<string> = [];

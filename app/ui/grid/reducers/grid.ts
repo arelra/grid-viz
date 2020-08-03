@@ -1,4 +1,4 @@
-import { Grid } from '../lib/grid-types';
+import { Grid, Position } from '../../types/grid-types';
 import { GridState } from '../Grid';
 import { traverse } from "../lib/grid-traverse";
 
@@ -9,7 +9,7 @@ enum GridActionTypes {
 };
 
 type GridActionPayloadForGrid = { grid: Grid };
-type GridActionPayloadForCell = { pos: [number, number] };
+type GridActionPayloadForCell = { pos: Position };
 
 type GridActionForGrid = {
   type: GridActionTypes.UPDATE_GRID,

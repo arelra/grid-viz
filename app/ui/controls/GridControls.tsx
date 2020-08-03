@@ -1,17 +1,14 @@
 import React from 'react';
 import SizeSlider from './SizeSlider';
 import ColorPicker from './ColorPicker';
-import { createRandomFill } from './lib/grid-creator';
+import { createRandomFill } from '../grid/lib/grid-creator';
+import { Fill } from '../types/grid-types';
+import { Colors } from '../types/color-types';
 
-interface Colors {
-  filled: string,
-  unfilled: string,
-  hover: string,
-};
 interface Props {
   size: number,
   setSize: (value: number) => void,
-  setFill: (value: Array<Array<number>>) => void,
+  setFill: (value: Fill) => void,
   colors: Colors,
   setColors: (value: Colors) => void,
 };
@@ -26,7 +23,7 @@ const gridControlsStyle = {
 
 const handleRandom = (
   size: number,
-  setFill: (value: Array<Array<number>>) => void,
+  setFill: (value: Fill) => void,
 ) => {
   setFill(createRandomFill(size));
 };

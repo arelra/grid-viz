@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "./Layout";
 import Grid from "./grid/Grid";
-import GridControls from './grid/GridControls';
+import GridControls from './controls/GridControls';
 import { createRandomFill } from "./grid/lib/grid-creator";
 
 const DEFAULT_GRID_SIZE = 5;

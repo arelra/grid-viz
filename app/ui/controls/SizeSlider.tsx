@@ -18,10 +18,13 @@ const SizeSlider = ({ size, setSize }: Props) => {
         min="5"
         max="50"
         onChange={handleChange}
+        style={{ width: "10rem" }}
       />
-      <label htmlFor="sizeSlider">{size} x {size}</label>
+      <label htmlFor="sizeSlider">
+        {size} x {size}
+      </label>
     </div>
-  )
+  );
 };
 
 export default SizeSlider;

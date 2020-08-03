@@ -1,14 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GridAction } from './reducers/grid';
-import {
-  GridActionTypes,
-  GridDispatchContext
-} from './Grid';
-interface Colors {
-  filled: string,
-  unfilled: string,
-  hover: string,
-};
+import { GridActionTypes, GridDispatchContext } from './Grid';
+import { Colors } from '../types/color-types';
 
 const cellStyle = (hover: boolean, filled: boolean, colors: Colors) => ({
   backgroundColor: hover ? colors.hover : (filled ? colors.filled : colors.unfilled),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from './grid-types';
+import { Grid, Fill } from '../../types/grid-types';
 import Cell from "../Cell";
 
 /**
@@ -10,7 +10,7 @@ import Cell from "../Cell";
  */
 const createGrid = (
   size: number,
-  fill: Array<Array<number>>
+  fill: Fill,
 ): Grid => {
   const rows = [...Array(size)];
   const grid = rows.map((r, i) =>
@@ -30,7 +30,7 @@ const randInterval = (size: number, div: number) =>
 
 const createRandomFill = (
   size: number,
-): Array<Array<number>> => {
+): Fill => {
   // random number of iterations per line
   const iterations = [
     randInterval(size, 5),

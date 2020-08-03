@@ -4,7 +4,8 @@ import React, {
   useReducer,
 } from "react";
 import { createGrid } from "./lib/grid-creator";
-import { Grid } from "./lib/grid-types";
+import { Grid, Fill } from "../types/grid-types";
+import { Colors } from "../types/color-types";
 import { gridReducer, GridAction, GridActionTypes } from "./reducers/grid";
 export { GridActionTypes } from './reducers/grid';
 
@@ -39,12 +40,6 @@ const defaultGridState: GridState = {
   },
 };
 
-interface Colors {
-  filled: string,
-  unfilled: string,
-  hover: string,
-};
-
 export const GridDispatchContext =
   createContext<{
     colors: Colors,
@@ -62,19 +57,14 @@ export const GridDispatchContext =
 
 interface GridProps {
   size: number,
-  fill: Array<Array<number>>,
-  colors: {
-    filled: string,
-    unfilled: string,
-    hover: string,
-  },
+  fill: Fill,
+  colors: Colors,
 };
 
 const Grid = (
   { size, fill, colors }: GridProps) => {
   const [state, dispatch] = useReducer(gridReducer, defaultGridState);
   useEffect(() => {
-    console.log(fill);
     const grid = createGrid(size, fill);
     const action: GridAction = {
       type: GridActionTypes.UPDATE_GRID,
