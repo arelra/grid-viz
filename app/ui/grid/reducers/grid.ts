@@ -6,16 +6,23 @@ enum GridActionTypes {
   CLICK_CELL = "CLICK_CELL",
   HOVER_CELL = "HOVER_CELL",
   UPDATE_GRID = "UPDATE_GRID",
-}
+};
 
 type GridActionPayloadForGrid = { grid: Grid };
 type GridActionPayloadForCell = { pos: [number, number] };
 
-type GridAction =
- | { type: GridActionTypes.UPDATE_GRID, payload: GridActionPayloadForGrid}
- | { type: GridActionTypes.CLICK_CELL, payload: GridActionPayloadForCell}
- | { type: GridActionTypes.HOVER_CELL, payload: GridActionPayloadForCell}
+type GridActionForGrid = {
+  type: GridActionTypes.UPDATE_GRID,
+  payload: GridActionPayloadForGrid,
+};
 
+type GridActionForCell = {
+  type: GridActionTypes.CLICK_CELL | GridActionTypes.HOVER_CELL,
+  payload: GridActionPayloadForCell,
+};
+
+export type GridAction = GridActionForGrid | GridActionForCell;
+ 
 const gridReducer = (state: GridState, action: GridAction): GridState => {
   switch (action.type) {
     case GridActionTypes.UPDATE_GRID: {

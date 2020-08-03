@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { GridAction } from './reducers/grid';
 import {
   GridActionTypes,
   GridDispatchContext
@@ -24,19 +25,19 @@ const Cell = ({ row, col, filled }: Props) => {
   const [hover, setHover] = useState(false);
   const dispatch = useContext(GridDispatchContext);
   const handleClick = () => {
-    const action = {
-      action: GridActionTypes.CLICK_CELL,
+    const action: GridAction = {
+      type: GridActionTypes.CLICK_CELL,
       payload: {
         pos: [row, col],
-      }
+      },
     };
     console.log(action);
     dispatch(action);
   }
   useEffect(() => {
     if (hover) {
-      const action = {
-        action: GridActionTypes.HOVER_CELL,
+      const action: GridAction = {
+        type: GridActionTypes.HOVER_CELL,
         payload: {
           pos: [row, col],
         },
