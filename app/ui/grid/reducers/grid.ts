@@ -40,7 +40,7 @@ const gridReducer = (state: GridState, action: GridAction): GridState => {
         grid: state.grid,
         hoverCells: state.hoverCells,
         clickCell: {
-          pos: clickCell,
+          key: `${clickCell[0]}-${clickCell[1]}`,
           text: String(hoverCells.length),
         },
       };

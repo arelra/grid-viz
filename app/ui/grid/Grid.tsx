@@ -24,19 +24,28 @@ export interface GridState {
   grid: Grid,
   hoverCells: Array<string>,
   clickCell: {
-    pos: [number, number],
+    key: string,
     text: string,
-  } | undefined,
-}
+  },
+};
 
 const defaultGridState: GridState = {
   grid: createGrid(5),
   hoverCells: [],
-  clickCell: undefined,
+  clickCell: {
+    key: "",
+    text: "",
+  },
 };
 
 export const GridDispatchContext =
-  createContext<React.Dispatch<GridAction>>(() => null);
+  createContext<{
+    state: GridState;
+    dispatch: React.Dispatch<GridAction>
+  }>({
+    state: defaultGridState,
+    dispatch: () => null
+  });
 
 const Grid = ({size}: {size: number}) => {
   const [state, dispatch] = useReducer(gridReducer, defaultGridState);
@@ -52,7 +61,7 @@ const Grid = ({size}: {size: number}) => {
   }, [size]);
   return (
     <div style={gridStyleCreator(size)}>
-      <GridDispatchContext.Provider value={dispatch}>
+      <GridDispatchContext.Provider value={{state, dispatch}}>
         {state.grid}
       </GridDispatchContext.Provider>
     </div>
