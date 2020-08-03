@@ -7,8 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "webpack --progress --profile --colors",
-    "build:watch": "webpack --progress --profile --colors --watch",
+    "build": "webpack --progress --profile --colors --mode production",
     "test": "jest",
     "test:watch": "jest --watch",
     "start": "webpack-dev-server --mode development"

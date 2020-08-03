@@ -3,5 +3,4 @@ node_modules
 *.log
 build
 .npmrc
-dist
 .vscode
