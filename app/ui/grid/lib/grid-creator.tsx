@@ -28,10 +28,14 @@ const rand = (min: number, max: number) =>
 const randInterval = (size: number, div: number) =>
   Math.floor(size / div);
 
+/**
+ * Creates a fill array using random number of random placements per grid row
+ * @param size size of corresponding NxN grid
+ */
 const createRandomFill = (
   size: number,
 ): Fill => {
-  // random number of iterations per line
+  // random number of random numbers generated per line
   const iterations = [
     randInterval(size, 5),
     randInterval(size, 4),

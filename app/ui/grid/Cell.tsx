@@ -15,16 +15,6 @@ const cellStyle = (hover: boolean, filled: boolean, colors: Colors) => ({
   borderRadius: "25%",
 }) as React.CSSProperties;
 
-// @keyframes pulse {
-//   0% {transform: scale(1);}
-//   50% {transform: scale(1.1);}
-//   100% {transform: scale(1);}
-// }
-
-const textAnimate = {
-
-}
-
 const textStyle = {
   animationDuration: "2.5s",
   animationFillMode: "both",
