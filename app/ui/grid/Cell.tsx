@@ -1,6 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { GridContext } from './Grid';
-import { traverse } from './lib/grid-traverse';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  GridActionTypes,
+  GridDispatchContext
+} from './Grid';
 
 const cellStyle = (hover: boolean, filled: boolean) => ({
   backgroundColor: hover ? 'pink' : (filled ? 'red' : 'white'),
@@ -20,19 +22,39 @@ interface Props {
 
 const Cell = ({ row, col, filled }: Props) => {
   const [hover, setHover] = useState(false);
-  const [isFilled, setFilled] = useState(filled);
-  const [text, setText] = useState("");
-  const grid = useContext(GridContext);
+  const dispatch = useContext(GridDispatchContext);
+  const handleClick = () => {
+    const action = {
+      action: GridActionTypes.CLICK_CELL,
+      payload: {
+        pos: [row, col],
+      }
+    };
+    console.log(action);
+    dispatch(action);
+  }
+  useEffect(() => {
+    if (hover) {
+      const action = {
+        action: GridActionTypes.HOVER_CELL,
+        payload: {
+          pos: [row, col],
+        },
+      };
+      console.log(action);
+      dispatch(action);
+    }
+  }, [hover]);
   return (
     <div
       data-row={row}
       data-col={col}
-      onClick={() => setText(String(traverse(grid, [row, col]).length))}
+      onClick={handleClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      style={cellStyle(hover, isFilled)}
+      style={cellStyle(hover, filled)}
     >
-      {text ? text: null}
+      
     </div>
   )
 };
