@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ReactElement } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import createGrid, { Grid } from './lib/grid-creator';
 
 const gridStyleCreator = (n: number) => {
@@ -14,19 +14,21 @@ const gridStyleCreator = (n: number) => {
   }
 };
 
+export const GridContext = createContext<Grid>([[]]);
+
 const Grid = ({size}: {size: number}) => {
-  const [grid, setGrid] = useState<Grid | undefined>();
+  const [grid, setGrid] = useState<Grid>(createGrid(5));
   useEffect(() => {
     const grid = createGrid(size);
     setGrid(grid);
   }, [size]);
   return (
-    <div>
-      <div style={gridStyleCreator(size)}>
+    <div style={gridStyleCreator(size)}>
+      <GridContext.Provider value={grid}>
         {grid}
-      </div>
+      </GridContext.Provider>
     </div>
-  )
+  );
 };
 
 export default Grid;

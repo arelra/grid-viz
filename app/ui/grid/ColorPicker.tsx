@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { SketchPicker } from 'react-color';
 
 const inactiveStyle = (col: string) => ({
-  width: "2rem",
-  height: "2rem",
+  width: "1.5rem",
+  height: "1.5rem",
   border: "1px solid lightgrey",
   backgroundColor: col,
 });
